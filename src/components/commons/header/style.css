@@ -1,0 +1,167 @@
+.drawer-header {
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  display: flex;
+}
+.drawer-header-text {
+  text-align: center;
+  font-family: freight-display-pro, serif;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 480px){ 
+  .ant-drawer-content-wrapper {
+    width: 100vw;
+  }
+}
+.cart-row2 {
+  @apply flex justify-between items-center;
+  margin-top: -7%; margin-bottom: 4%;
+}
+.currency-div {
+  position: relative;
+  width: auto;
+}
+.close-cart {
+  display: inline-block;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 0px;
+  padding: 0rem;
+  border-radius: 9999px;
+}
+.close-cart-div {
+  @apply flex justify-center items-center;
+  border-radius: 9999px;
+  border: 2px solid rgb(198, 204, 199);
+  width: 3rem;
+  height: 3rem;
+}
+
+.close-cart-icon {
+  vertical-align: middle;
+  display: inline-block;
+  color: currentcolor;
+  flex-shrink: 0;
+  font-size: 15px;
+}
+.currency-selector + div {
+  right: 0rem;
+  left: unset;
+}
+.currency-selector {
+  color: currentcolor;
+  font-size: 13px;
+  position: absolute;
+  display: inline-flex;
+  width: 1.5rem;
+  height: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  right: 0.5rem;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.currency-select {
+  width: 100%;
+  outline: 0px;
+  position: relative;
+  appearance: none;
+  transition: all 0.2s ease 0s;
+  padding-right: 25px;
+  color: currentcolor;
+  height: 38px;
+  background: transparent;
+  border-radius: 0px;
+  border: 0px;
+  font-size: 13px;
+}
+.currency-select-icon {
+  width: 1em;
+  height: 1em;
+  color: currentcolor;
+}
+
+.cart-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  margin-bottom: 0.25rem;
+  overscroll-behavior: auto;
+  height: 400px;
+}
+.cart-group > :not(style) ~ :not(style) {
+  margin-top: 1rem;
+  margin-left: 0rem;
+}
+
+.cart-payment-section {
+  flex-direction: column;
+  display: flex;
+  padding-top: 1.25rem;
+  max-width: 100%;
+}
+.cart-subtotal {
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  display: flex;
+  margin-bottom: 0.75rem;
+}
+
+.cart-subtotal-text {
+  font-family: "FF Bau Regular", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 11.2px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.cart-subtotal-price {
+  flex-flow: row wrap;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  display: flex;
+}
+.cart-subtotal-price-text {
+  font-family: "FF Bau Regular", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.payment-button {
+  display: flex;
+  appearance: none;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  outline: none;
+  border: 0px;
+  font-weight: 600;
+  font-family: "FF Bau Regular", sans-serif;
+  padding: 1rem;
+  min-height: 52px;
+  background: rgb(75, 85, 72);
+  width: 100%;
+  text-transform: uppercase;
+}
+.payment-button-text {
+  font-family: "FF Bau Regular", sans-serif;
+  color: rgb(252, 252, 249);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  margin: 0px;
+}

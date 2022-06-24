@@ -1,23 +1,40 @@
-import React, { useState } from 'react';
-import { GetCurrencies } from './api/gql/query';
-import { useQuery } from '@apollo/client';
+import React, { useContext, useEffect, useState } from 'react';
 import './App.css';
+import { Header } from './components/commons/header';
+import { AppContext, AppContextProvider } from './context';
 
 const App = () => {
-  //GetCurrencies
-  const { loading, error, data } = useQuery(GetCurrencies);
+  const [appStates, setAppStates] = useContext(AppContext);
 
-  const { loading: ProductsLoading, error: PErr, data: ProductsData } = useQuery(
-    GetCurrencies, { variables: { currency: "NGN" } }
-  );
+  useEffect(() => {
+    window.addEventListener('beforeunload', function (e) {
+      this.localStorage.setItem(
+        "user_cart", JSON.stringify(appStates.cartItems)
+      );
+    });
+
+    window.addEventListener("load", function (e) {
+      const userCart = localStorage.getItem("user_cart");
+      if ( typeof userCart === 'object' ) {
+        setAppStates({ ...appStates, cartItems: JSON.parse(userCart ?? "") });
+      }
+      setAppStates({ ...appStates, cartItems: {} });
+    });
+
+    return () => {
+      window.removeEventListener('beforeunload', () => {})
+    }
+
+  })
 
   return (
+  <AppContextProvider>
     <div className="App">
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+      <Header title="product-page" />
+
 
     </div>
+  </AppContextProvider>
   );
 }
 
