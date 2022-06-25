@@ -10,7 +10,7 @@ const useCurrency = () => {
   }
 
   return { 
-    currencies: appStates.currencies, 
+    currencies: appStates.currencies,
     localeCurrency: appStates.localeCurrency, SetLocaleCurrency 
   };
 }

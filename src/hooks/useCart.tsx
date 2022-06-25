@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../context";
-import { InCartType } from "../types";
+import { Cart, InCartType, Product } from "../types";
 
 const useCart = () => {
 
@@ -11,82 +11,124 @@ const useCart = () => {
   const CloseCart = () => setAppStates({ ...appStates, cartState: "closed" });
 
   const ProductIsInCart: InCartType = (productId) => {
-    let key = appStates.cartItems[productId] ?? undefined;
-    if ( key !== undefined ) {
+    let data = FetchProductFromCart(productId);
+    if ( data.productId && data.productId > 0 ) {
       return true;
     }
     return false
   }
 
   const IncrementProductInCart = (productId: number) => {
-    const cartItems = appStates.cartItems;
-    cartItems[productId] = cartItems[productId] + 1;
-    setAppStates({ ...appStates, cartItems: cartItems });
-  }
-
-  const RemoveFromCart = (productId: number) => {
-    const cartItems = appStates.cartItems;
-    delete cartItems[`${productId}`];
-
-    setAppStates({ ...appStates, cartItems: { ...cartItems } });
-    return true
-  }
-
-  const DecrementProductInCart = (productId: number) => {
-    const cartItems = appStates.cartItems;
-    if ( cartItems[`${productId}`] < 2 ) {
-      RemoveFromCart(productId);
-    }else{
-      cartItems[productId] = cartItems[productId] - 1;
-      setAppStates({ ...appStates, cartItems: cartItems });
+    let cartItems = FetchDataFromStorage();
+    for (let index = 0; index < cartItems.length; index++) {
+      const element = cartItems[index];
+      if (element.productId === productId) {
+        cartItems[index] = { productId, qty: element.qty+1 }
+        SaveDataFromStorage(cartItems);
+        break;
+      }
     }
   }
 
+  const RemoveFromCart = (productId: number) => {
+    let cartItems = FetchDataFromStorage()
+    for (let index = 0; index < cartItems.length; index++) {
+      const element = cartItems[index];
+      if (element.productId === productId) {
+        cartItems.splice(index, 1);
+        SaveDataFromStorage(cartItems)
+        break;
+      }
+    }
+    //CloseCart();
+  }
 
-  const FetchProductPrice = (productId: number) => {
+  const DecrementProductInCart = (productId: number) => {
+    const cartItem = FetchProductFromCart(productId);
+    if ( cartItem.qty < 2 ) {
+      RemoveFromCart(productId);
+    }else{
+      let cartItems = FetchDataFromStorage();
+      for (let index = 0; index < cartItems.length; index++) {
+        const element = cartItems[index];
+        if (element.productId === productId) {
+          cartItems[index] = { productId, qty: element.qty-1 }
+          SaveDataFromStorage(cartItems);
+        }
+      }
+      //CloseCart();
+    }
+  }
+
+  const FetchProduct = (productId: number) => {
     let len = appStates.products.length;
     for (let index = 0; index < len; index++) {
       const element = appStates.products[index];
       if (element.id === productId) {
-        return element.price;
+        return element;
       }
     }
     //product no longer exists
     RemoveFromCart(productId);
-    return 0;
+    return {} as Product;
   }
 
   const TotalSumOfPrice = () => {
     let total = 0;
-    for (let key in appStates.cartItems) {
-      let qty = appStates.cartItems[key];
-      total += FetchProductPrice(Number(key).valueOf()) * qty;
+    let cartItems = FetchDataFromStorage();
+    let len = cartItems.length;
+    for (let index = 0; index < len; index++) {
+      let eachItem = cartItems[index];
+      let product = FetchProduct(eachItem.productId);
+      if ( product.price && product.price > 0 ) {
+        total += product.price * eachItem.qty;
+      }
     }
     return total;
   }
 
+  const FetchDataFromStorage = () => {
+    let user_cart = localStorage.getItem('user_cart');
+    let userCartArray = JSON.parse(user_cart ?? "[]");
+    return userCartArray;
+  }
+
+  const FetchProductFromCart = (productId: number) => {
+    let userCartArray = FetchDataFromStorage();
+    let len = userCartArray.length;
+    for (let index = 0; index < len; index++) {
+      const element = userCartArray[index];
+      if (element.productId === productId) {
+        return element;
+      }
+    }
+    return { } as Cart;
+  }
+
   const ItemQty = (productId: number) => {
-    const cartItems = appStates.cartItems;
-    return cartItems[productId];
+    return FetchProductFromCart(productId).qty;
+  }
+
+  const SaveDataFromStorage = (userCartArray: any) => {
+    localStorage.setItem( 'user_cart', JSON.stringify(userCartArray) );
   }
 
   const AddToCart = (productId: number) => {
-
     if ( ProductIsInCart(productId) ) {
       IncrementProductInCart(productId);
     }else{
-      setAppStates({ 
-        ...appStates, cartItems: { ...appStates.cartItems, [productId]: 1 }
-      });
+      let userCartArray = FetchDataFromStorage();
+      userCartArray.push({ qty: 1, productId: productId });
+      SaveDataFromStorage(userCartArray);
     }
-    return true
+    OpenCart();
   }
 
   return {
     AddToCart, RemoveFromCart, ItemQty,
     loading: appStates.loading, OpenCart,
-    cartItems: appStates.cartItems, CloseCart,
-    OpenedCart: appStates.cartState === 'opened',
+    cartItems: FetchDataFromStorage(), CloseCart, FetchDataFromStorage,
+    OpenedCart: appStates.cartState === 'opened', FetchProduct,
     IncrementProductInCart, DecrementProductInCart, TotalSumOfPrice
   };
 

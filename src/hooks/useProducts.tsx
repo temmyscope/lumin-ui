@@ -7,7 +7,7 @@ const useProducts = () => {
 
   return {
     loading: appStates.loading,
-    products: appStates.products
+    products: appStates.products,
   };
 }
 

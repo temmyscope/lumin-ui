@@ -5,7 +5,7 @@ import { ProductCard as ProductCardComponent } from "../../../types";
 
 const ProductCard: ProductCardComponent = (item) => {
   const { localeCurrency } = useCurrency();
-  const { AddToCart, OpenCart } = useCart();
+  const { AddToCart } = useCart();
 
   return ( 
     <div className="w-full bg-white rounded-xl card py-9">
@@ -22,7 +22,7 @@ const ProductCard: ProductCardComponent = (item) => {
         </div>
         <div>
           <button className='w-full p-3 bg-btnBg text-white' 
-            onClick={() => AddToCart(item.id) && OpenCart()}>
+            onClick={() => { AddToCart(item.id); }}>
             Add To Cart
           </button>
         </div>

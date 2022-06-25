@@ -4,8 +4,8 @@ export interface AppState {
   loading: boolean
   localeCurrency: string
   products: Array<Product>
-  cartItems: { [key: number]: number }
-  cartState: 'opened'|'closed'
+  cartState: 'opened'|'closed',
+  forceUiUpdate: number
 }
 
 export interface CartItem {

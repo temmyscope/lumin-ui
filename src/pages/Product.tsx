@@ -8,19 +8,6 @@ const ProductPage = () => {
   const [appStates, setAppStates] = useContext(AppContext);
 
   useEffect(() => {
-    window.addEventListener('beforeunload', function (e) {
-      this.localStorage.setItem(
-        "user_cart", JSON.stringify(appStates.cartItems)
-      );
-    });
-
-    window.addEventListener("load", function (e) {
-      const userCart = localStorage.getItem("user_cart");
-      if ( typeof userCart === 'object' ) {
-        setAppStates({ ...appStates, cartItems: JSON.parse(userCart ?? "") });
-      }
-      setAppStates({ ...appStates, cartItems: {} });
-    });
 
     fetch(`${process.env.REACT_APP_GRAPHQL_ENDPOINT}`, {
       method: 'POST', headers: {
@@ -43,15 +30,12 @@ const ProductPage = () => {
     .then(json => {
       setAppStates({ 
         ...appStates, loading: false,
-        products: json["data"]["products"], 
-        currencies: json["data"]["currency"] 
+        products: json["data"]["products"] ?? [], 
+        currencies: json["data"]["currency"] ?? []
       });
     }).catch(err => console.log(`Error: ${err}`));
 
-    return () => {
-      window.removeEventListener('beforeunload', () => {})
-    }
-  }, [ appStates.localeCurrency, setAppStates ]);
+  }, [ appStates.localeCurrency ]);
 
   return (
   <div className="App">
