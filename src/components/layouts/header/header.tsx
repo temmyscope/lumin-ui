@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import './index.css';
-import { Drawer } from 'antd';
+import { Drawer, Badge } from 'antd';
 import { ShoppingCartOutlined, RightOutlined } from '@ant-design/icons';
 import { UserOutlined, SearchOutlined, MenuOutlined } from '@ant-design/icons';
 import { DownOutlined, FilterOutlined } from '@ant-design/icons';
@@ -12,7 +12,7 @@ import { LightLogo, DarkLogo } from '../../commons/logos';
 
 const Header = ({ title }: {title: string}) => {
   const { cartItems, OpenedCart, OpenCart, CloseCart, TotalSumOfPrice } = useCart();
-  const { currencies, localeCurrency } = useCurrency();
+  const { currencies, localeCurrency, SetLocaleCurrency } = useCurrency();
 
   const [ mobileW, setMobileW ] = useState(window.innerWidth) 
   const updateWidth = () => {
@@ -59,22 +59,32 @@ const Header = ({ title }: {title: string}) => {
           <Link to="#" className='px-4 lg:block hidden order-1'>
           <SearchOutlined className='text-2xl' />
           </Link>
-          <Link to="#" className='px-4 order-4 lg:order-2'>
-            <ShoppingCartOutlined className='text-2xl' onClick={OpenCart} />
-          </Link>
+          <div 
+            className='px-4 order-4 lg:order-2 cursor-pointer' 
+            onClick={(e) => OpenCart()}
+          >
+            <Badge count={Object.keys(cartItems).length}>
+              <ShoppingCartOutlined className='text-2xl' />
+            </Badge>
+          </div>
           <Link to="#" className='px-4 lg:block hidden order-3'>
             <UserOutlined className='text-2xl' />
           </Link>
           <div className='order-2 lg:order-4'>
-            <label htmlFor="cur" className='px-4'>NGN</label>
-            <select name="cur" id="cur" className='select'>
+            <label htmlFor="cur" className='px-4'>
+            {localeCurrency}
+            </label>
+            <select 
+              name="cur" id="cur" className='select' 
+              onChange={(e) => SetLocaleCurrency(e.target.value)}
+            >
               {currencies.map((eachCurrency, index) => (
                 <option value={eachCurrency} key={index}>
                   {eachCurrency}
                 </option>
               ))}
             </select>
-            </div>
+          </div>
         </div>
       </nav>
       <Drawer
@@ -91,10 +101,21 @@ const Header = ({ title }: {title: string}) => {
               <RightOutlined className="close-cart-icon" onClick={CloseCart}  />
             </div>
           </button>
+
           
           <div className="currency-div">
-            <select aria-label="Choose a currency." className="currency-select">
-              <option value="AED">AED</option>
+
+            <select 
+              aria-label="Choose a currency." className="currency-select"
+              onChange={(e) => SetLocaleCurrency(e.target.value)}
+            >
+              {currencies.map((eachCurrency, index) => (
+                <option 
+                  value={eachCurrency} key={index}
+                  selected={eachCurrency === localeCurrency}
+                >{eachCurrency}
+                </option>
+              ))}
             </select>
 
             <div className="currency-selector">
@@ -102,6 +123,25 @@ const Header = ({ title }: {title: string}) => {
             </div>
 
           </div>
+          
+
+          {/** 
+          <div className='order-2 lg:order-4'>
+            <label htmlFor="cur" className='px-4'>
+              {localeCurrency}
+            </label>
+            <select 
+              name="cur" id="cur" className='select cursor-pointer' 
+              onChange={(e) => SetLocaleCurrency(e.target.value)}
+            >
+              {currencies.map((eachCurrency, index) => (
+                <option value={eachCurrency} key={index}>
+                  {eachCurrency}
+                </option>
+              ))}
+            </select>
+          </div>
+          */}
 
         </div>
 
@@ -173,7 +213,7 @@ const Header = ({ title }: {title: string}) => {
             <Link to="#">Face</Link>
           </li>
           <li className='px-5'>
-            <Link to="#">Hair & Body</Link>
+            <Link to="#">Hair &amp; Body</Link>
           </li>
           <li className='px-5'>
             <Link to="#">Bundles</Link>

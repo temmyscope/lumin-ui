@@ -51,7 +51,7 @@ const ProductPage = () => {
     return () => {
       window.removeEventListener('beforeunload', () => {})
     }
-  }, [ appStates, setAppStates ]);
+  }, [ appStates.localeCurrency, setAppStates ]);
 
   return (
   <div className="App">

@@ -1,4 +1,3 @@
-import React, { useContext, useEffect, useState } from "react";
 import './style.css';
 import { CloseOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { useCart } from "../../../hooks/useCart";
@@ -28,7 +27,7 @@ const CartCard: CartCardComponentType = (cart) => {
           
           <div className="cart-item-qty-section">
             <MinusOutlined className="cart-qty-action-icon" onClick={() => DecrementProductInCart(0)} />
-            <p className="cart-item-qty">1{/*ItemQty('')*/}</p>
+            <p className="cart-item-qty">{ItemQty(cart.productId)}</p>
             <PlusOutlined className="cart-qty-action-icon" onClick={() => IncrementProductInCart(0)}/>
           </div>
 

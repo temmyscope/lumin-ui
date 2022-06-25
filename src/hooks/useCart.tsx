@@ -6,9 +6,9 @@ const useCart = () => {
 
   const [ appStates, setAppStates ] = useContext(AppContext);
 
-  const OpenCart = () => setAppStates({ ...appStates, cartState: 'opened' });
+  const OpenCart = () => setAppStates({ ...appStates, cartState: "opened" });
 
-  const CloseCart = () => setAppStates({ ...appStates, cartState: 'closed' });
+  const CloseCart = () => setAppStates({ ...appStates, cartState: "closed" });
 
   const ProductIsInCart: InCartType = (productId) => {
     let key = appStates.cartItems[productId] ?? undefined;
