@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../context";
-import { InCartType, CartItem } from "../types";
+import { InCartType } from "../types";
 
 const useCart = () => {
 
@@ -29,6 +29,7 @@ const useCart = () => {
     delete cartItems[`${productId}`];
 
     setAppStates({ ...appStates, cartItems: { ...cartItems } });
+    return true
   }
 
   const DecrementProductInCart = (productId: number) => {
@@ -78,13 +79,14 @@ const useCart = () => {
         ...appStates, cartItems: { ...appStates.cartItems, [productId]: 1 }
       });
     }
+    return true
   }
 
   return {
     AddToCart, RemoveFromCart, ItemQty,
     loading: appStates.loading, OpenCart,
     cartItems: appStates.cartItems, CloseCart,
-    OpenedCart: appStates.cartState == 'opened',
+    OpenedCart: appStates.cartState === 'opened',
     IncrementProductInCart, DecrementProductInCart, TotalSumOfPrice
   };
 

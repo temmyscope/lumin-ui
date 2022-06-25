@@ -11,7 +11,7 @@ const AppContext = React.createContext<[
 const AppContextProvider = ({ children }: { children: any }) => {
 
   const [appStates, setAppStates] = useState<AppState>({ 
-    cartItems: {}, localeCurrency: "NGN", loading: true, 
+    cartItems: {}, localeCurrency: 'NGN', loading: true, 
     products: [], currencies: ["NGN"], cartState: 'closed'
   });
 

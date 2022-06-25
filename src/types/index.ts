@@ -1,11 +1,10 @@
-import React from "react"
 
 export interface AppState {
   currencies: Array<string>
   loading: boolean
   localeCurrency: string
   products: Array<Product>
-  cartItems: { [key: number]: number },
+  cartItems: { [key: number]: number }
   cartState: 'opened'|'closed'
 }
 
@@ -21,7 +20,7 @@ export interface Cart {
 export interface Product {
   id: number
   title: string
-  image: string
+  image_url: string
   price: number
 }
 export type CartCardComponentType = (Props: Cart) => JSX.Element;

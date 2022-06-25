@@ -1,38 +1,33 @@
-.App {
-  text-align: center;
+header {
+  border-bottom: 1px solid lightgray;
+  box-shadow: 3px 10px #F5F5F4;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+main {
+  background-color: #F5F5F4;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.banner__section {
+  background-image: url('https://cdn.shopify.com/s/files/1/2960/5204/files/HERO_1264x352_0dfec503-d85d-4a9b-a0aa-d0b92cae2727.jpg?v=1637235066');
+  height: 352px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  /* background-color: rgba(0, 0, 0, 0.7); */
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.overlay {
+  /* position: fixed; */
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
 }
-
-.App-link {
-  color: #61dafb;
+.select {
+  outline: none;
+  width: 20px;
+  background: none;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sticky__sect {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
 }
