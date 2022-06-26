@@ -12,9 +12,7 @@ import { Cart } from "../../../types";
 import { useUiUpdate } from "../../../hooks/useUiUpdate";
 
 const Header: React.FC<{nav: boolean, setNav: (val: boolean) => any}> = ({ nav, setNav }) => {
-  const { 
-    cartItems, OpenedCart, OpenCart, CloseCart,  TotalSumOfPrice 
-  } = useCart();
+  const { cartItems, OpenedCart, OpenCart, CloseCart,  TotalSumOfPrice } = useCart();
   const { currencies, localeCurrency, SetLocaleCurrency } = useCurrency();
   const [ mobileW, setMobileW ] = useState(window.innerWidth) 
   const updateWidth = () => {

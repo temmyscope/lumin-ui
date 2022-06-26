@@ -1,5 +1,3 @@
-
-
 const GraphqlFetch: any = (currency: string) => {
 
   return fetch(`${process.env.REACT_APP_GRAPHQL_ENDPOINT}`, {
@@ -16,8 +14,7 @@ const GraphqlFetch: any = (currency: string) => {
           price(currency: $currency)
         }
         currency
-      }`, 
-      variables: { currency: currency ?? 'NGN' }
+      }`, variables: { currency: currency }
     })
   }).then(res => res.json())
   .then(json => json)

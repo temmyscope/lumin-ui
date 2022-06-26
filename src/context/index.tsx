@@ -12,7 +12,7 @@ const AppContextProvider = ({ children }: { children: any }) => {
 
   const [appStates, setAppStates] = useState<AppState>({ 
     localeCurrency: 'USD', loading: true, forceUiUpdate: 0,
-      products: [], currencies: ["USD"], cartState: 'closed'
+    products: [], currencies: ["USD"], cartState: 'closed', sortBy: 'default'
   });
 
   return (

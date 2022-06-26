@@ -2,9 +2,11 @@ import './index.css';
 import { ProductSection as ProductSectionType } from "../../../types";
 import { ProductCard } from "../../commons/product";
 import { useProducts } from "../../../hooks/useProducts";
+import { useUiUpdate } from '../../../hooks/useUiUpdate';
 
 const ProductSection: ProductSectionType = () => {
   const { products, loading } = useProducts();
+  const { SortProductBy } = useUiUpdate();
   
   
   if (loading === true) {
@@ -26,7 +28,7 @@ const ProductSection: ProductSectionType = () => {
         </div>
 
         <div className="md:grid xl:grid-cols-3 md:grid-cols-2 md:gap-x-10 xl:w-bestWidth lg:w-9/12 mx-auto md:gap-y-20 overflow-x-scroll w-full justify-start flex-nowrap flex px-10 lg:px-0">
-          {products.map((product, index: number) => (
+          {SortProductBy(products).map((product, index: number) => (
             <div className='flex min-w-full' key={index}>
               <ProductCard
                 id={product.id} image_url={product.image_url}

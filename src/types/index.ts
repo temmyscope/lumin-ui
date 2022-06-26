@@ -4,8 +4,9 @@ export interface AppState {
   loading: boolean
   localeCurrency: string
   products: Array<Product>
-  cartState: 'opened'|'closed',
+  cartState: 'opened'|'closed'
   forceUiUpdate: number
+  sortBy: 'lowest' | 'highest' | 'default'
 }
 
 export interface CartItem {
@@ -33,3 +34,5 @@ export type InCartType = (productId: number) => boolean
 export type ProductCard = (Props: Product) => JSX.Element;
 
 export type ProductSection = () => JSX.Element;
+
+export type SortingFn = (Products: Array<Product>) => Array<Product>
