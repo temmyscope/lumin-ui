@@ -8,8 +8,8 @@ const ProductCard: ProductCardComponent = (item) => {
   const { AddToCart } = useCart();
 
   return ( 
-    <div className="w-full bg-white rounded-xl card py-9">
-      <div className='w-cardWidth mx-auto'>
+    <div className="w-full  bg-white rounded-xl card py-9">
+      <div className='w-cardWidth sm:w-80 mx-auto product-card'>
         <div className='my-5'>
           <img src={item.image_url} alt="" className='h-40 w-40 mx-auto object-contain' />
         </div>
