@@ -25,9 +25,9 @@ const ProductSection: ProductSectionType = () => {
           <a href="/">Shop all Best Sellers products (6)</a>
         </div>
 
-        <div className="lg:grid xl:grid-cols-3 lg:grid-cols-2 gap-x-10 xl:w-bestWidth lg:w-9/12 mx-auto gap-y-20 overflow-x-scroll flex w-full justify-evenly flex-nowrap">
+        <div className="md:grid xl:grid-cols-3 md:grid-cols-2 md:gap-x-10 xl:w-bestWidth lg:w-9/12 mx-auto md:gap-y-20 overflow-x-scroll w-full justify-start flex-nowrap flex px-10 lg:px-0">
           {products.map((product, index: number) => (
-            <div className='overflow-x-scroll' key={index}>
+            <div className='flex min-w-full' key={index}>
               <ProductCard
                 id={product.id} image_url={product.image_url}
                   price={product.price} title={product.title} 

@@ -186,10 +186,11 @@ const Header: React.FC = () => {
         </div>
       </div>
     </main>
+
     { nav &&  (
-    <nav className="modal fixed left-0 top-0 right-0 bottom-0 h-screen z-50" onClick={()=> setNav(false)}>
+    <nav className="modal fixed left-0 top-0 right-0 bottom-0 h-screen z-50" onClick={()=> setNav(true)}>
       <aside className="modal__content h-full bg-white z-50" onClick={e => e.stopPropagation()}>
-       <div className="w-full border-b border-gray-200">
+        <div className="w-full border-b border-gray-200">
           <div className="w-navWidth mx-auto flex h-20 items-center">
               <div className="block w-40">
                 <CloseOutlined className="text-xl" onClick={()=> setNav(false)} />
@@ -198,40 +199,40 @@ const Header: React.FC = () => {
                 <img src="https://www.luminskin.com/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Flogo.20c2cb1d9d2bb6d2139d0e5cec3103bd.png&w=384&q=75" alt="" className="" />
               </div>
           </div>
-       </div>
+        </div>
 
        {/* links */}
-       <div className="w-navWidth mx-auto">
-        <ul className="text-gray-500">
-          <li className="py-5 w-full flex justify-between border-b border-gray-200">
-            <Link to='/'>SHOP</Link>
-            <div className="">
-              <RightOutlined />
-            </div>
-          </li>
-          <li className="w-full py-5 border-b border-gray-200">
-            <Link to='/'>REVIEWS</Link>
-          </li>
-          <li className="py-5 w-full flex justify-between border-b border-gray-200">
-            <Link to='/'>ABOUT</Link>
-            <div className="">
-              <RightOutlined />
-            </div>
-          </li>
-          <li className="py-5 w-full flex justify-between border-b border-gray-200">
-            <Link to='/'>SUPPORT</Link>
-            <div className="">
-              <RightOutlined />
-            </div>
-          </li>
-          <li className="w-full py-5 border-b border-gray-200">
-            <Link to='/'>BLOG</Link>
-          </li>
-          <li className="w-full py-5 border-b border-gray-200">
-            <Link to='/'>MY ACCOUNT</Link>
-          </li>
-        </ul>
-       </div>
+        <div className="w-navWidth mx-auto">
+          <ul className="text-gray-500">
+            <li className="py-5 w-full flex justify-between border-b border-gray-200">
+              <Link to='/'>SHOP</Link>
+              <div className="">
+                <RightOutlined />
+              </div>
+            </li>
+            <li className="w-full py-5 border-b border-gray-200">
+              <Link to='/'>REVIEWS</Link>
+            </li>
+            <li className="py-5 w-full flex justify-between border-b border-gray-200">
+              <Link to='/'>ABOUT</Link>
+              <div className="">
+                <RightOutlined />
+              </div>
+            </li>
+            <li className="py-5 w-full flex justify-between border-b border-gray-200">
+              <Link to='/'>SUPPORT</Link>
+              <div className="">
+                <RightOutlined />
+              </div>
+            </li>
+            <li className="w-full py-5 border-b border-gray-200">
+              <Link to='/'>BLOG</Link>
+            </li>
+            <li className="w-full py-5 border-b border-gray-200">
+              <Link to='/'>MY ACCOUNT</Link>
+            </li>
+          </ul>
+        </div>
       </aside>
     </nav>
     )}
@@ -260,13 +261,7 @@ const Header: React.FC = () => {
         </ul>
 
         <div className='flex gap-4'>
-          <div className='flex w-32 justify-between h-full items-center border-gray-500 border rounded p-2 cursor-pointer'>
-            <div className='flex h-full items-center'>
-              <FilterOutlined className='' />
-              <p className='px-2'>Filters</p>
-            </div>
-            <DownOutlined />
-          </div>
+          
           <div>
             <div className='flex w-60 justify-between h-full items-center border-gray-500 border rounded p-2 cursor-pointer'>
               <p>Sort by: </p>

@@ -9,10 +9,12 @@ const ProductCard: ProductCardComponent = (item) => {
 
   return ( 
     <div className="md:w-full w-bestWidth bg-white rounded-xl card py-9">
-      <div className='w-cardWidth sm:w-80 mx-auto product-card'>
+      <div className='w-cardWidth mx-auto'>
+        
         <div className='my-5'>
           <img src={item.image_url} alt="" className='h-40 w-40 mx-auto object-contain' />
         </div>
+
         <div>
           <p className='text-center text-gray-500 py-3'>
             {localeCurrency}&nbsp;
@@ -20,12 +22,14 @@ const ProductCard: ProductCardComponent = (item) => {
           </p>
           <h1 className='text-center capitalize'>{ item.title } </h1>
         </div>
+
         <div>
           <button className='w-full p-3 bg-btnBg text-white' 
             onClick={() => { AddToCart(item.id); }}>
             Add To Cart
           </button>
         </div>
+        
       </div>
     </div>
    );
