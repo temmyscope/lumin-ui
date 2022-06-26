@@ -39,7 +39,7 @@ const ProductPage = () => {
 
   return (
   <div className="App">
-    <Header title='Products' />
+    <Header />
     <ProductSection />
   </div>
   );

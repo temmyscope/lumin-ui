@@ -12,7 +12,7 @@ import { LightLogo, DarkLogo } from '../../commons/logos';
 import { Cart } from "../../../types";
 import { useUiUpdate } from "../../../hooks/useUiUpdate";
 
-const Header = ({ title }: {title: string}) => {
+const Header: React.FC = () => {
   const { 
     cartItems, OpenedCart, OpenCart, CloseCart,  TotalSumOfPrice 
   } = useCart();
