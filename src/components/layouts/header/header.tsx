@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import './index.css';
 import { Drawer, Badge } from 'antd';
-import { ShoppingCartOutlined, RightOutlined, CloseOutlined } from '@ant-design/icons';
-import { UserOutlined, SearchOutlined, MenuOutlined } from '@ant-design/icons';
-import { DownOutlined, FilterOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, RightOutlined } from '@ant-design/icons';
+import { UserOutlined, SearchOutlined, MenuOutlined, DownOutlined } from '@ant-design/icons';
 import { useCart } from "../../../hooks/useCart";
 import { CartCard } from "../../commons/cart";
 import { useCurrency } from "../../../hooks/useCurrency";
@@ -21,12 +20,8 @@ const Header: React.FC<{nav: boolean, setNav: (val: boolean) => any}> = ({ nav, 
   const updateWidth = () => {
     setMobileW(window.innerWidth);
   }
+
   const { forceUiUpdate } = useUiUpdate();
-  /*
-  const forceUpdate = React.useCallback(
-    (random: number) => ForceUiUpdate(random), []
-  );
-  */
 
   useEffect(()=> {
     window.addEventListener('resize', updateWidth);
