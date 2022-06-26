@@ -1,11 +1,13 @@
-import { useContext, useEffect } from 'react';
-import { Header } from '../components/layouts/header/header';
+import { useContext, useEffect, useState } from 'react';
+import { Banner } from '../components/layouts/banner';
+import { StickyNav, Header, MobileHeader } from '../components/layouts/header';
 import { ProductSection } from '../components/layouts/product/product';
 import { AppContext } from '../context';
 
 
 const ProductPage = () => {
   const [appStates, setAppStates] = useContext(AppContext);
+  const [nav, setNav] = useState(false)
 
   useEffect(() => {
 
@@ -39,7 +41,10 @@ const ProductPage = () => {
 
   return (
   <div className="App">
-    <Header />
+    <Header nav={nav} setNav={setNav} />
+    <Banner />
+    <MobileHeader nav={nav} setNav={() => setNav(false)} />
+    <StickyNav />
     <ProductSection />
   </div>
   );

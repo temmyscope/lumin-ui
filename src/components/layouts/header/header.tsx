@@ -12,11 +12,10 @@ import { LightLogo, DarkLogo } from '../../commons/logos';
 import { Cart } from "../../../types";
 import { useUiUpdate } from "../../../hooks/useUiUpdate";
 
-const Header: React.FC = () => {
+const Header: React.FC<{nav: boolean, setNav: (val: boolean) => any}> = ({ nav, setNav }) => {
   const { 
     cartItems, OpenedCart, OpenCart, CloseCart,  TotalSumOfPrice 
   } = useCart();
-  const [nav, setNav] = useState(false)
   const { currencies, localeCurrency, SetLocaleCurrency } = useCurrency();
   const [ mobileW, setMobileW ] = useState(window.innerWidth) 
   const updateWidth = () => {
@@ -41,10 +40,12 @@ const Header: React.FC = () => {
     <header className="w-full lg:bg-white bg-black lg:text-gray-700 text-white h-28 fixed top-0">
       
       <nav className="w-navWidth mx-auto h-full flex justify-between items-center">
+        
         <div className='lg:hidden'>
-          <MenuOutlined className='cursor-pointer text-3xl' />
+          <MenuOutlined className='cursor-pointer text-3xl' onClick={() => setNav(true)} />
           <SearchOutlined className='text-3xl px-3' />
         </div>
+
         <ul className='lg:flex hidden font-normal'>
           <li className='px-1 text-xl'>
             <Link to="#">Shop</Link>
@@ -164,113 +165,6 @@ const Header: React.FC = () => {
 
       </Drawer>
     </header>
-
-    {/* main banner section */}
-    <main className="w-full mt-20">
-      <div className='w-navWidth mx-auto'>
-        <div className='w-full h-24 flex items-center'>
-          <h3>Home</h3>
-        </div>
-
-        {/* main banner section */}
-        <div className='banner__section w-full'>
-          <div className='overlay'>
-            <div className='z-50 flex flex-col items-center justify-center h-80'>
-                <h1 className='text-white text-3xl'>New to Skincare?</h1>
-                <p className='text-white py-2'>Unlock your personality skincare routine today.</p>
-                <button className='bg-white text-gray-700 py-4 px-8 w-52 mt-12'>
-                  START SHOPPING
-                </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-
-    { nav &&  (
-    <nav className="modal fixed left-0 top-0 right-0 bottom-0 h-screen z-50" onClick={()=> setNav(true)}>
-      <aside className="modal__content h-full bg-white z-50" onClick={e => e.stopPropagation()}>
-        <div className="w-full border-b border-gray-200">
-          <div className="w-navWidth mx-auto flex h-20 items-center">
-              <div className="block w-40">
-                <CloseOutlined className="text-xl" onClick={()=> setNav(false)} />
-              </div>
-              <div className="lg:w-48 w-40">
-                <img src="https://www.luminskin.com/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimg%2Flogo.20c2cb1d9d2bb6d2139d0e5cec3103bd.png&w=384&q=75" alt="" className="" />
-              </div>
-          </div>
-        </div>
-
-       {/* links */}
-        <div className="w-navWidth mx-auto">
-          <ul className="text-gray-500">
-            <li className="py-5 w-full flex justify-between border-b border-gray-200">
-              <Link to='/'>SHOP</Link>
-              <div className="">
-                <RightOutlined />
-              </div>
-            </li>
-            <li className="w-full py-5 border-b border-gray-200">
-              <Link to='/'>REVIEWS</Link>
-            </li>
-            <li className="py-5 w-full flex justify-between border-b border-gray-200">
-              <Link to='/'>ABOUT</Link>
-              <div className="">
-                <RightOutlined />
-              </div>
-            </li>
-            <li className="py-5 w-full flex justify-between border-b border-gray-200">
-              <Link to='/'>SUPPORT</Link>
-              <div className="">
-                <RightOutlined />
-              </div>
-            </li>
-            <li className="w-full py-5 border-b border-gray-200">
-              <Link to='/'>BLOG</Link>
-            </li>
-            <li className="w-full py-5 border-b border-gray-200">
-              <Link to='/'>MY ACCOUNT</Link>
-            </li>
-          </ul>
-        </div>
-      </aside>
-    </nav>
-    )}
-
-    <aside className='w-full sticky top-20 bg-bodybg'>
-      <div className='w-navWidth mx-auto flex justify-between h-24 items-center'>
-        <ul className='flex'>
-          <li>
-            <Link to="#">All</Link>
-          </li>
-          <li className='px-5'>
-            <Link to="#">Best Sellers</Link>
-          </li>
-          <li className='px-5'>
-            <Link to="#">Face</Link>
-          </li>
-          <li className='px-5'>
-            <Link to="#">Hair & Body</Link>
-          </li>
-          <li className='px-5'>
-            <Link to="#">Bundles</Link>
-          </li>
-          <li className='px-5'>
-            <Link to="#">Accessories</Link>
-          </li>
-        </ul>
-
-        <div className='flex gap-4'>
-          
-          <div>
-            <div className='flex w-60 justify-between h-full items-center border-gray-500 border rounded p-2 cursor-pointer'>
-              <p>Sort by: </p>
-              <DownOutlined className='' />
-            </div>
-          </div>
-        </div>
-      </div>
-    </aside>
   </>
   );
 
